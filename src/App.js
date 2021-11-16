@@ -29,8 +29,19 @@ function App() {
     setModal(!modal);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (item) => {
     toggle();
+    // console.log(item)
+    if (item.id) {
+      axios
+        .put(`http://localhost:8000/todos/${item.id}/`, item)
+        .then(res => {
+          setRefresh(!refresh)
+          setActiveItem({ title: "", description: "", completed: false })
+        });
+      return;
+    }
+
     axios.post("http://localhost:8000/todos/", activeItem)
       .then((response) => setRefresh(!refresh))
       .catch(error => {
@@ -44,8 +55,8 @@ function App() {
   };
 
   const editItem = item => {
-    axios.put(`http://localhost:8000/todos/${item.id}`)
-      .then((response) => setRefresh(!refresh))
+    setActiveItem(item)
+    setModal(true);
   };
 
 

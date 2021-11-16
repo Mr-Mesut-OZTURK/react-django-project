@@ -17,7 +17,7 @@ const ModalComp = ({ activeItem, setActiveItem, toggle, onSave }) => {
 
     const handleChange = e => {
         if (e.target.type === "checkbox") {
-            setActiveItem({ ...activeItem, [e.target.value]: e.target.checked });
+            setActiveItem({ ...activeItem, [e.target.name]: e.target.checked });
             return
         }
         setActiveItem({ ...activeItem, [e.target.name]: e.target.value });
@@ -33,7 +33,7 @@ const ModalComp = ({ activeItem, setActiveItem, toggle, onSave }) => {
                         <Input
                             type="text"
                             name="title"
-                            // value={changeItem.title}
+                            value={activeItem.title}
                             onChange={handleChange}
                             placeholder="Enter Todo Title"
                         />
@@ -43,7 +43,7 @@ const ModalComp = ({ activeItem, setActiveItem, toggle, onSave }) => {
                         <Input
                             type="text"
                             name="description"
-                            // value={description}
+                            value={activeItem.description}
                             onChange={handleChange}
                             placeholder="Enter Todo description"
                         />
@@ -53,7 +53,7 @@ const ModalComp = ({ activeItem, setActiveItem, toggle, onSave }) => {
                             <Input
                                 type="checkbox"
                                 name="completed"
-                                // checked={completed}
+                                checked={activeItem.completed}
                                 onChange={handleChange}
                             />
                             Completed
